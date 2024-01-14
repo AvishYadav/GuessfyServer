@@ -27,6 +27,7 @@ io.on("connection", (socket) => {
   socket.on("join-room", (room, cb) => {
     socket.join(room);
     cb(`joined-room ${room}`);
+    socket.to(room).emit("player-joined", "Someone Joined");
   });
 });
 
