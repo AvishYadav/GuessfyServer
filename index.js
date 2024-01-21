@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
+import { Socket } from "dgram";
 
 const httpServer = createServer();
 
@@ -28,6 +29,10 @@ io.on("connection", (socket) => {
     socket.join(room);
     cb(`joined-room ${room}`);
     socket.to(room).emit("player-joined", "Someone Joined");
+  });
+
+  socket.on("selected-char", (selectedChar, room) => {
+    socket.to(room).emit("char-select", selectedChar);
   });
 });
 
