@@ -34,6 +34,10 @@ io.on("connection", (socket) => {
   socket.on("selected-char", (selectedChar, room) => {
     socket.to(room).emit("char-select", selectedChar);
   });
+
+  socket.on("toggle-start", (room) => {
+    socket.to(room).emit("start-true");
+  });
 });
 
 httpServer.listen(3001, () => {
